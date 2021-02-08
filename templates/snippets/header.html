@@ -1,0 +1,42 @@
+{% load static %}
+
+<div class="d-flex flex-column flex-lg-row p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+
+    <!-- MEDIUM+ screens -->
+    <div class="d-none d-md-flex flex-row my-auto flex-grow-1 align-items-center">
+		<!-- admin btn for easier access -->
+		{% if request.user.is_authenticated %}
+         <ul class="right mr-3 font-weight-normal justify-content-start ">
+			 <li class=""><a href="{% url 'account:view' user_id=request.user.id %}">Профиль</a></li>
+			 <li class=""><a href="{% url 'logout' %}">Выйти</a></li>
+		 </ul>
+		{% else %}
+		<div class="d-flex flex-row-reverse flex-grow-1">
+            <nav class="">
+				<a class="p-2 text-dark" href="{% url 'login' %}">Войти</a>
+				<a class="btn btn-outline-primary" href="{% url 'register' %}">Зарегестрироваться</a>
+			</nav>
+        </div>
+		{% endif %}
+
+    </div>
+
+    <!-- SMALL - screens -->
+    <div class="d-flex d-md-none flex-column my-auto align-items-center">
+        <!-- row3 -->
+        <div class="d-flex flex-row-reverse flex-grow-1">
+            <nav class="">
+                {% if request.user.is_authenticated %}
+                    <ul class="right mr-3 font-weight-normal justify-content-start ">
+            			<li class=""><a href="{% url 'account:view' user_id=request.user.id %}">Профиль</a></li>
+            			<li class=""><a href="{% url 'logout' %}">Выйти</a></li>
+        			</ul>
+                {% else %}
+                    <a class="p-2 text-dark" href="{% url 'login' %}">Войти</a>
+                    <a class="btn btn-outline-primary m-2" href="{% url 'register' %}">Зарегестрироваться</a>
+                {% endif %}
+            </nav>
+        </div>
+    </div>
+
+</div>

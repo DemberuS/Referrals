@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style type="text/css">
+
+	.field-heading{
+		color: var(--secondary-text-color);
+	}
+	.icon-container:hover {
+		opacity: 0.3;
+		cursor: pointer;
+	}
+	.person-add-icon{
+		color: #4287f5;
+		font-size: 40px;
+	}
+	.dropdown-toggle::after {
+		content: none;
+	}
+	.card{
+		border-radius: 12px;
+	}
+	.material-icons{
+		font-size: 30px;
+	}
+	.material-icons:hover{
+		cursor: pointer;
+	}
+</style>
+
+<div class="container-fluid">
+	<div class="d-flex flex-row justify-content-center flex-wrap align-items-start">
+
+		<div class="card profile-card m-2">
+		  <div class="card-body">
+		  	<div class="d-flex flex-column justify-content-center p-4">
+		  		<p class="mt-4 mb-1 field-heading">Телефон</p>
+		  		{%  if is_self %}
+		  			<h5>{{phone}}</h5>
+
+		  		{% else %}
+		  			{% if hide_phone %}
+			  			<h5>**********</h5>
+			  		{% else %}
+			  			<h5>{{phone}}</h5>
+			  		{% endif %}
+			  	{% endif %}
+
+		  		<!-- If Auth user is viewing their own profile -->
+		  		{% if is_self %}
+				<div class="d-flex flex-column mt-4">
+					<a class="m-auto" href="{% url 'password_change' %}">Сменить пароль</a>
+				</div>
+		  		{% endif %}
+		  	</div>
+		  </div>
+		</div>
+
+		{% if request.user.is_authenticated %}
+		<div class="d-flex flex-column mb-4">
+
+			<!-- THEM to YOU -->
+			<div class="card m-2 p-4">
+				<div class="d-flex flex-row align-items-center">
+
+				</div>
+			</div>
+			{% else %}
+			{% endif %}
+		</div>
+	</div>
+</div>
+
+
+{% endblock content %}
